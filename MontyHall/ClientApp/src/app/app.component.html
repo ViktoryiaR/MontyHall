@@ -1,0 +1,35 @@
+<body>
+  <div class="center">
+    <h1>Monty Hall Simulation</h1>
+    <form [formGroup]="form">
+      <div class="form-group">
+        <label for="numberOfGames">Number of Games</label>
+        <input type="number" class="form-control" id="numberOfGames" 
+          [attr.title]="numberOfGamesWarning"
+          placeholder="Enter number of simulated games"
+          formControlName="numberOfGames">
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="isChangeStrategy"
+          formControlName="isChangeStrategy">
+        <label class="form-check-label" for="isChangeStrategy">Is Change Strategy</label>
+      </div>
+      <div class="form-btns">
+        <button class="btn btn-primary" type="submit" 
+          (click)="execute()" [disabled]="form.invalid || inProgress">
+          Execute
+        </button>
+      </div>
+    </form>
+    <div class="result">
+      Win Rate: 
+      <strong *ngIf="!inProgress">{{ winRate }}</strong>
+      <div *ngIf="inProgress" class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <div class="text-danger" *ngIf="executeErrorMessage">
+      {{executeErrorMessage}}
+    </div>
+  </div>
+</body>
